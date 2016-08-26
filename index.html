@@ -1,26 +1,118 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>前端学习</title>
     <style type="text/css">
         body {
-            margin: 0;
-            padding: 0;
-            background-color: #fff;
+            font: 14px/1.5 "Hiragino Sans GB", "Hiragino Sans GB W3", 微软雅黑;
         }
 
-        #drag_div {
-            width: 150px;
-            height: 150px;
-            padding: 10px;
-            margin: 10px;
-            background-color: #66dd33;
-            cursor: move;
+        .itemlist-container {
+            width: 600px;
+            height: auto;
+            border: 1px solid #9cc8f7;
+            margin: 60px auto;
+            padding: 20px;
+            border-radius: 3px;
+            box-shadow: 3px 3px 10px #9cc8f7;
+        }
+
+        .itemlist-container li {
+            list-style: none;
+        }
+        .itemlist-container > li {
+            border-bottom: 1px solid #8d8d8d;
+        }
+
+        .itemlist-container .item-title {
+            font-weight: bold;
+        }
+        .itemlist-container .item-title:hover{
+            cursor: pointer;
+        }
+        .itemlist-container .item {
+            height: 30px;
+            line-height: 30px;
+            font-size: 24px;
+            color: #0a8cd2;
+            padding: 6px;
+        }
+
+        .itemlist-container .item:hover a,.itemlist-container .item:hover {
+            background-color: #0a8cd2;
+            color: #fff;
+            border-radius: 3px;
+        }
+
+        .item-list {
+            display: none;
+        }
+
+        .item-list a {
+            color: #0a8cd2;
+        }
+
+        .itemlist-container .active {
+            display: block;
+        }
+        .itemlist-container li span {
+            margin-right: 4px;
+        }
+        .itemlist-container .item-list li span:after {
+            content: '.';
         }
     </style>
 </head>
-</html>
 <body>
-Hello world!!!
+<div class="itemlist-container">
+</div>
 </body>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script>
+    var itemListJson = [
+        {
+            "item_title": "表单处理",
+            "children": [
+                {text: "只允许输入数字", url: "Form/1.html"},
+                {text: "级联选择", url: "Form/2.html"}
+            ]
+        },
+        {
+            "item_title": "选项卡",
+            "children": [
+                {text: "简单Tab1", url: "Tab/tab-1/index.html"},
+                {text: "简单Tab2", url: "Tab/tab-2/index.html"}
+            ]
+        },
+        {
+            "item_title": "练习",
+            "children": [
+                {text: "数组去重", url: "Practise/1.html"}
+            ]
+        }
+    ];
+    var number = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二", "十三", "十四"];
+    for (var i = 0; i < itemListJson.length; i++) {
+        var html = "<li>";
+        html += " <div class='item item-title'><span>" + number[i] + "、" + itemListJson[i].item_title + "</span></div>";
+        html += "<div class='item-list'><ul>";
+        for (var j = 0; j < itemListJson[i].children.length; j++) {
+            var url = itemListJson[i].children[j].url;
+            var text = itemListJson[i].children[j].text;
+            html += "<li class='item'><span>" + (j + 1) + "</span><a href='" + url + "'>" + text + "</a></li>";
+        }
+        html += "</ul> </div>";
+        html += "</li>";
+        $(".itemlist-container").append(html);
+    }
+    $(".item-title").bind('click', function () {
+        if ($(this).next().hasClass("active")) {
+            $(this).next().removeClass("active");
+        } else {
+            $('.item-list.active').removeClass('active');
+            $(this).next().addClass("active");
+        }
+    });
+</script>
 </html>

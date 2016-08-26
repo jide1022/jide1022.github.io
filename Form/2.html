@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>级联选择</title>
+    <style>
+        body {
+            font: 24px "Hiragino Sans GB", "Hiragino Sans GB W3", 微软雅黑;
+        }
+
+        .container {
+            width: 600px;
+            margin: 60px auto;
+            text-align: center;
+        }
+
+        select {
+            height: 30px;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <label>省:</label><select id="level-one"></select><label>市:</label><select id="level-two"></select>
+</div>
+</body>
+<script>
+    var citys = [
+                {
+                    '江苏省': ['南京', '无锡', '徐州', '常州', '苏州', '南通', '连云港', '淮安', '盐城', '扬州', '镇江', '泰州', '宿迁']
+                },
+                {
+                    '浙江省': ['杭州', '宁波', '温州', '嘉兴', '湖州', '绍兴', '金华', '衢州', '舟山', '台州', '丽水']
+                },
+                {
+                    '安徽省': ['合肥', '芜湖', '蚌埠', '淮南', '马鞍山', '淮北', '铜陵', '安庆', '黄山', '滁州', '阜阳', '宿州', '巢湖', '六安', '亳州', '池州', '宣城']
+                },
+                {
+                    '福建省': ['福州', '厦门', '莆田', '三明', '泉州', '漳州', '南平', '龙岩', '宁德']
+                },
+                {
+                    '江西省': ['南昌', '景德镇', '萍乡', '九江', '新余', '鹰潭', '赣州', '吉安', '宜春', '抚州', '上饶']
+                },
+                {
+                    '山东省': ['济南', '青岛', '淄博', '枣庄', '东营', '烟台', '潍坊', '威海', '济宁', '泰安', '日照', '莱芜', '临沂', '德州', '聊城', '滨州', '菏泽']
+                },
+                {
+                    '河南省': ['郑州', '开封', '洛阳', '平顶山', '焦作', '鹤壁', '新乡', '安阳', '濮阳', '许昌', '漯河', '三门峡', '南阳', '商丘', '信阳', '周口', '驻马店']
+                },
+                {
+                    '湖北省': ['武汉', '黄石', '襄樊', '十堰', '荆州', '宜昌', '荆门', '鄂州', '孝感', '咸宁', '随州', '恩施']
+                },
+                {
+                    '湖南省': ['长沙', '株洲', '湘潭', '衡阳', '邵阳', '岳阳', '常德', '张家界', '益阳', '郴州', '永州', '怀化', '娄底', '湘西']
+                },
+                {
+                    '广东省': ['广州', '深圳', '珠海', '汕头', '韶关', '佛山', '江门', '湛江', '茂名', '肇庆', '惠州', '梅州', '汕尾', '河源', '阳江', '清远', '东莞', '中山', '潮州', '揭阳', '云浮']
+                },
+                {
+                    '广西自治区': ['南宁', '柳州', '桂林', '梧州', '北海', '防城港', '钦州', '贵港', '玉林', '百色', '贺州', '河池', '来宾', '崇左']
+                }
+            ]
+            ;
+    var levelOne = document.getElementById("level-one");
+    var levelTwo = document.getElementById("level-two");
+    for (var i = 0; i < citys.length; i++) {
+        var _city=Object.keys(citys[i])[0];
+        levelOne.options[i] = new Option(_city, _city);
+    }
+    setLevelTwo(levelOne.options[levelOne.selectedIndex].value);
+    levelOne.addEventListener("change",function(event){
+        setLevelTwo(event.target.value);
+    });
+    function setLevelTwo(city) {
+        levelTwo.options.length = 0;
+        for (var i = 0; i < citys.length; i++) {
+            var _city = Object.keys(citys[i])[0];
+            if (city == _city) {
+                var childCitys = citys[i][_city];
+                for (var j = 0; j < childCitys.length; j++) {
+                    levelTwo.options[j] = new Option(childCitys[j], childCitys[j]);
+                }
+            }
+        }
+    }
+</script>
+</html>
