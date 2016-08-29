@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>冒泡排序</title>
+    <style>
+        body {
+            font: 24px "Hiragino Sans GB", "Hiragino Sans GB W3", 微软雅黑;
+        }
+
+        .container {
+            width: 600px;;
+            margin: 60px auto;
+            text-align: center;
+        }
+
+        input {
+            height: 24px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <p>输入数组项(数字,逗号分隔)</p>
+    <input id="sourceArray" type="text" value="12,1,23,543,1,12,34,23,2,3,4,3,2">
+    <input type="button" value="冒泡排序" onclick="bubbleSort()">
+    <p>排序结果</p>
+    <input id="resultArray" type="text">
+</div>
+<script>
+    function bubbleSort() {
+        var array = document.getElementById("sourceArray").value.split(',');
+        var k = array.length;
+        while (k - 1) {
+            for (var i = 0; i < k - 1; i++) {
+                if (parseInt(array[i]) > parseInt(array[i + 1])) {
+                    swap(array, i, i + 1);
+                }
+            }
+            k--;
+        }
+        document.getElementById("resultArray").value = array.join(',');
+    }
+    function swap(array, i, j) {
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+</script>
+</body>
+</html>
