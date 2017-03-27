@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        .container {
+            height: 200px;
+            width: 1200px;
+            margin: 100px auto 50px;
+            background-color: #ECECEC;
+            position: relative;
+        }
+
+        .column {
+            background-color: #ACD5E5;
+            position: absolute;
+        }
+
+        .column span {
+            position: absolute;
+            top: -20px;
+            text-align: center;
+            display: block;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container" class="container">
+    </div>
+    <div style="text-align: center">
+        <button onclick="sort()">sort 冒泡</button>
+        <button onclick="init()">打乱</button>
+    </div>
+</body>
+<script src="../lib/jquery.min.js"></script>
+<script src="../lib/jquery.color.js"></script>
+<script>
+    var container = $("#container");
+    var _array = [];
+    init();
+
+    function init() {
+        _array = [];
+        container.empty();
+        var count = 10;
+        var columnWidth = 40;
+        var columnGapWidth = 10;
+        var allWidth = (count - 1) * columnGapWidth + count * columnWidth;
+        var baseLeft = (container.width() - allWidth) / 2;
+        for (var i = 0; i < count; i++) {
+            var e = 0;
+            while (e === 0 || _array.indexOf(e) != -1) {
+                e = Math.floor(100 * Math.random());
+            }
+            _array.push(e);
+            var _column = $("<div>").height(e).width(columnWidth)
+                .addClass('column')
+                .html("<span>" + e + "</span>")
+                .attr('id', e)
+                .css({
+                    left: baseLeft + i * (columnWidth + columnGapWidth) + 'px',
+                    top: container.height() - e + 'px'
+                });
+            container.append(_column);
+        }
+    }
+
+    function sort() {
+        var quen = [];
+        var length = _array.length;
+        for (var i = 0; i < _array.length - 1; i++) {
+            for (var j = 0; j < length - 1; j++) {
+                if ((j + 1) < length) {
+                    if (j + 1 === length - 1) {
+                        quen.push([j, j + 1, true]);
+                    } else {
+                        quen.push([j, j + 1, false]);
+                    }
+                }
+            }
+            length--; //已经冒泡成功的不需要再次对比
+        }
+        doCompare(quen, _array);
+    }
+
+    function doCompare(quen, _array) {
+        var one = quen.shift();
+        if (one) {
+            var a = _array[one[0]];
+            var b = _array[one[1]];
+            var done = one[2];
+            var _a = $('#' + a);
+            var _b = $('#' + b);
+            $.when(
+                _a.animate({
+                    backgroundColor: '#0D8000'
+                }, "normal"),
+                _b.animate({
+                    backgroundColor: '#0D8000'
+                }, "normal")
+            ).done(function () {
+                if (a > b) {
+                    var aleft = _a.css('left');
+                    var bleft = _b.css('left');
+                    $.when(
+                        _a.animate({
+                            backgroundColor: '#0D8000',
+                            left: bleft
+                        }, "normal"),
+                        _b.animate({
+                            backgroundColor: '#0D8000',
+                            left: aleft
+                        }, "normal")
+                    ).done(function () {
+                        $.when(
+                            _a.animate({
+                                backgroundColor: '#ACD5E5'
+                            }, "normal"),
+                            _b.animate({
+                                backgroundColor: '#ACD5E5'
+                            }, "normal")
+                        ).done(function () {
+                            _array[one[0]] = b;
+                            _array[one[1]] = a;
+                            if (done) {
+                                _a.animate({
+                                    backgroundColor: '#FDA700'
+                                }, "fast");
+                            }
+                            doCompare(quen, _array);
+                        });
+                    });
+                } else {
+                    $.when(
+                        _a.animate({
+                            backgroundColor: '#ACD5E5'
+                        }, "normal"),
+                        _b.animate({
+                            backgroundColor: '#ACD5E5'
+                        }, "normal")
+                    ).done(function () {
+                        if (done) {
+                            _b.animate({
+                                backgroundColor: '#FDA700'
+                            }, "fast");
+                        }
+                        doCompare(quen, _array);
+                    });
+                }
+            });
+        } else {
+            $('.column').animate({
+                backgroundColor: '#ACD5E5'
+            }, "fast");
+        }
+    }
+</script>
+
+</html>
