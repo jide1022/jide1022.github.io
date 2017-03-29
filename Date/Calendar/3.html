@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <title>日历</title>
+    <link rel="stylesheet" href="calendar.css">
+</head>
+
+<body>
+    <div id='cc' style="width: 260px;height:230px;margin:100px auto"></div>
+    <div style="text-align: center">
+        <button onclick="today()">Today</button>
+    </div>
+</body>
+<script src="../../lib/jquery.min.js"></script>
+<script src="calendar.js"></script>
+<script>
+    var calendar = new calendar("cc");
+
+    function today() {
+        calendar.setDate(new Date());
+    }
+</script>
+
+</html>

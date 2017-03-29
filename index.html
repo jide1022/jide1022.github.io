@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>前端学习</title>
@@ -22,7 +23,7 @@
             list-style: none;
         }
 
-        .itemlist-container > li {
+        .itemlist-container>li {
             border-bottom: 1px solid #8d8d8d;
         }
 
@@ -42,7 +43,8 @@
             padding: 6px;
         }
 
-        .itemlist-container .item:hover a, .itemlist-container .item:hover {
+        .itemlist-container .item:hover a,
+        .itemlist-container .item:hover {
             background-color: #0a8cd2;
             color: #fff;
             border-radius: 3px;
@@ -69,44 +71,68 @@
         }
     </style>
 </head>
+
 <body>
-<div class="itemlist-container">
-</div>
+    <div class="itemlist-container">
+    </div>
 </body>
 <script src="lib/jquery.min.js"></script>
 <script>
-    var itemListJson = [
-        {
+    var itemListJson = [{
             "item_title": "表单处理",
-            "children": [
-                {text: "只允许输入数字", url: "Form/1.html"},
-                {text: "级联选择", url: "Form/2.html"}
+            "children": [{
+                    text: "只允许输入数字",
+                    url: "Form/1.html"
+                },
+                {
+                    text: "级联选择",
+                    url: "Form/2.html"
+                }
             ]
         },
         {
             "item_title": "选项卡",
-            "children": [
-                {text: "简单Tab1", url: "Tab/tab-1/index.html"},
-                {text: "简单Tab2", url: "Tab/tab-2/index.html"}
+            "children": [{
+                    text: "简单Tab1",
+                    url: "Tab/tab-1/index.html"
+                },
+                {
+                    text: "简单Tab2",
+                    url: "Tab/tab-2/index.html"
+                }
             ]
+        },
+        {
+            "item_title": "时间/日期",
+            "children": [{
+                text: "日历",
+                url: "Date/3.html"
+            }]
         },
         {
             "item_title": "消息",
-            "children": [
-                {text: "简单消息", url: "Message/index.html"}
-            ]
+            "children": [{
+                text: "简单消息",
+                url: "Message/index.html"
+            }]
         },
         {
             "item_title": "菜单",
-            "children": [
-                {text: "简单横向菜单", url: "Menu/menu-1/index.html"}
-            ]
+            "children": [{
+                text: "简单横向菜单",
+                url: "Menu/menu-1/index.html"
+            }]
         },
         {
             "item_title": "练习",
-            "children": [
-                {text: "数组去重", url: "Practise/1.html"},
-                {text: "冒泡排序", url: "Practise/2.html"}
+            "children": [{
+                    text: "数组去重",
+                    url: "Practise/1.html"
+                },
+                {
+                    text: "冒泡排序",
+                    url: "Practise/2.html"
+                }
             ]
         }
     ];
@@ -133,4 +159,5 @@
         }
     });
 </script>
+
 </html>
