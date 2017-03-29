@@ -23,7 +23,6 @@ body {
 }
 
 .item {
-    float: left;
     text-align: center;
     background-color: #0a8cd2;
     color: #fff;
