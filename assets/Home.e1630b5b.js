@@ -1,0 +1,1 @@
+import{d as s,r,o as t,c as a}from"./vendor.7b098658.js";const m=s({setup(c){const o=e=>{console.log(JSON.stringify(e))};return(e,p)=>{const n=r("XFormDesign");return t(),a(n,{onSave:o,"show-header":!1})}}});export{m as default};
